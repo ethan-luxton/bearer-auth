@@ -5,9 +5,7 @@ const { server } = require('../src/server.js');
 const { sequelize } = require('../src/models/index.js');
 const request = supertest(server);
 
-beforeAll(async () => {await sequelize.sync();});
 
-afterAll(async () => {await sequelize.drop();});
 
 const createUser = async () => {
   return await request.post('/signup').send({
@@ -17,6 +15,9 @@ const createUser = async () => {
 };
 
 describe('POST Users', () => {
+  beforeEach(async () => {await sequelize.sync();});
+
+  afterEach(async () => {await sequelize.drop();});
   test.skip('Tests posting to /signup route', async () => {
     const res = await createUser();
     expect(res.status).toBe(201);

@@ -3,6 +3,8 @@ const { makeFood } = require('./user.model')
 const { makeClothes } = require('./clothes.model')
 const Collection = require('./class-collection')
 
+const { makeUser } = require('../auth/models/user')
+
 const DATABASE_URL =
     process.env.NODE_ENV === 'test'
         ? 'sqlite::memory:'
@@ -23,8 +25,11 @@ const sequelize = new Sequelize(DATABASE_URL, CONNECTION_OPTIONS)
 const Food = makeFood(sequelize)
 const Clothes = makeClothes(sequelize)
 
+const AuthUser = makeUser(sequelize)
+
 module.exports = {
     sequelize,
     foodCollection: new Collection(Food),
     clothesCollection: new Collection(Clothes),
+    AuthUser,
 }

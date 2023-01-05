@@ -5,7 +5,7 @@ const COMPLEXITY = 8
 
 function makeUser(sequelize) {
     console.log('I AM MAKING A USER TABLE HERE')
-    const Users = sequelize.define('User', {
+    const Users = sequelize.define('Users', {
         username: DataTypes.STRING,
         password: DataTypes.STRING,
     })
